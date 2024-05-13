@@ -1,0 +1,22 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend/index.js",
+    "develop": "concurrently \"cd backend && npm run watch\" \"cd frontend && npm run dev\"",
+    "setup": "cd backend && npm i && cd ../frontend/frontend && npm i",
+    "build": "cd frontend && npm run build",
+    "seed": "cd backend && npm run seed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "react-router-dom": "^6.23.1"
+  }
+}
