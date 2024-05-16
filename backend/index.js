@@ -2,6 +2,8 @@ const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
+const cors = require('cors');
+const goalRoutes = require('./routes/goalRoutes');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -17,6 +19,7 @@ const startApolloServer = async () => {
   await server.start();
 
   app.use(express.urlencoded({ extended: false }));
+  app.use(cors());
   app.use(express.json());
   
   // In development, we run two servers concurrently that work together
@@ -28,6 +31,8 @@ const startApolloServer = async () => {
       res.sendFile(path.join(__dirname, '../client/dist/index.html'));
     });
   }
+  
+  app.use('/goals', goalRoutes);
   
   app.use('/graphql', expressMiddleware(server));
 
